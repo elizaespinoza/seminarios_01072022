@@ -269,7 +269,7 @@ class: middle
 # Relatório
 
 ```{r}
-xaringanExtra::embed_xaringan("https://github.com/ElizaAlfaro", max_width = "80%")
+xaringanExtra::embed_xaringan("https://github.com/ElizaAlfaro/seminarios_01072022/blob/master/docs/img/result/relatorio.pdf", max_width = "80%")
 ```
 
 ---
