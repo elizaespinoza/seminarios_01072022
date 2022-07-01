@@ -1,6 +1,6 @@
 # Apresentação - Seminários em Bioinformática
 
-Aqui está o source code, imagens e link da apresentação de resultados do meu doutorado em Bioinformática na Universidade Federal de Minas Gerais.
+Aqui está o source code, imagens e link da apresentação de resultados parciais do meu doutorado em Bioinformática na Universidade Federal de Minas Gerais.
 
 ## Licença de uso
 
