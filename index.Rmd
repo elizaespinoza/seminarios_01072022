@@ -290,7 +290,7 @@ class: middle
 |Workflows complexos|Estándares internacionais|Guia Interativo|Versão inglês|Análise de dados|
 |:-:|:-:|:-:|:-:|:-:|:-:|
 |<img src="https://cdn-icons-png.flaticon.com/512/1574/1574138.png"</>|<img src="https://cdn-icons-png.flaticon.com/512/1156/1156677.png"</>|<img src="img/nextstep/userGuide.png"</>|<img src="https://cdn-icons-png.flaticon.com/512/5511/5511398.png"</>|<img src="https://cdn-icons-png.flaticon.com/512/3043/3043574.png"</>|
-|Cada membro|MIAPE, BPL, ISO17904|Todas as atividades|Workflow e Guia Interivo|Integrar ferramentas|
+|Mais funcionalidades|MIAPE, BPL, ISO17904|Todas as atividades|Workflow e Guia Interivo|Integrar ferramentas|
 
 
 .pull-right[
