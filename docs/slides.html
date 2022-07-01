@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Desenvolvimento de um software para o gerenciamento e integração</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Discente: Elizabeth Alfaro-Espinoza" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <script src="libs/xaringanExtra-progressBar/progress-bar.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script src="libs/fabric/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"dd00dea52add4d25b99961dee1164b38","expires":1}</script>
+    <script src="libs/himalaya/himalaya.js"></script>
+    <script src="libs/js-cookie/js.cookie.js"></script>
+    <link href="libs/editable/editable.css" rel="stylesheet" />
+    <script src="libs/editable/editable.js"></script>
+    <script src="libs/fitvids/fitvids.min.js"></script>
+    <link rel="stylesheet" href="css/default.css" type="text/css" />
+    <link rel="stylesheet" href="css/mmp.css" type="text/css" />
+    <link rel="stylesheet" href="css/mmp-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Desenvolvimento de um software para o gerenciamento e integração
+## de dados de proteômica
+### Discente: Elizabeth Alfaro-Espinoza
+### Orientador: Sérgio Aguiar Vale Campos
+### Co-orientadora: Alessandra Conceição Faria Campos
+
+---
+
+layout: true
+  
+&lt;div class="my-footer"&gt;&lt;span&gt;
+Seminários em Bioinformática 27/06/2022 - &lt;a href="https://github.com/ElizaAlfaro"&gt;Elizabeth Alfaro-Espinoza&lt;/a&gt;
+&lt;/span&gt;&lt;/div&gt;
+
+
+---
+class: middle
+
+
+
+
+<style>.xe__progress-bar__container {
+  top:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 10px;
+  background-color: #0051BA;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
+
+
+
+&lt;img src="img/intro/intro.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+class: middle
+
+&lt;img src="img/intro/introQ.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+class: middle
+
+&lt;img src="img/intro/limsFluxPRT.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+class: middle
+
+.left-column[ 
+
+# LIMS
+⛔ Papelada
+
+⛔ Custo tempo
+
+🔍 Resultados
+
+🔍 Amostras
+
+👉 Relatórios
+
+🎯 Trabalho do lab
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;img src="visual_citations/Higgins_2022.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+]
+
+.right-column[ 
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/intro/limsUsers.svg" alt="Adaptado de Higgins, Nogiwa-Valdez e Stevens (2022). " width="80%" /&gt;
+&lt;p class="caption"&gt;Adaptado de Higgins, Nogiwa-Valdez e Stevens (2022). &lt;/p&gt;
+&lt;/div&gt;
+]
+
+---
+class: middle
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/intro/fluxprt.png" alt="Integração de ferramentas e métodos de proteómica em um sistema." width="90%" /&gt;
+&lt;p class="caption"&gt;Integração de ferramentas e métodos de proteómica em um sistema.&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: middle
+
+# Objetivos Específicos
+&lt;br&gt;
+
+### &lt;center&gt;FluxPRT: &lt;i&gt;"Integração de ferramentas e métodos de proteómica em um sistema"&lt;/i&gt;&lt;br&gt;&lt;br&gt;&lt;/center&gt;
+
+|Workflow complexos|Compartilhar dados|Rastreabilidade|Análise de dados|Geração de relatórios|
+|:-:|:-:|:-:|:-:|:-:|
+|&lt;img src="https://cdn-icons-png.flaticon.com/512/1574/1574138.png"&lt;/&gt;|&lt;img src="img/nextstep/sharedata.png"&lt;/&gt;|&lt;img src="https://cdn-icons-png.flaticon.com/512/477/477818.png"&lt;/&gt;|&lt;img src="https://cdn-icons-png.flaticon.com/512/3043/3043574.png"&lt;/&gt;|&lt;img src="https://cdn-icons-png.flaticon.com/512/1188/1188525.png"&lt;/&gt;|
+
+.pull-right[
+*Fonte: &lt;a href="https://www.flaticon.com/free-icons/share" title="share icons"&gt;Freepik - Flaticon&lt;/a&gt;. Licença CC Atrib.*
+]
+
+---
+class: middle
+
+# Desenvolvimento do FluxPRT
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/metod/metodologia.svg" alt="&amp;lt;i&amp;gt;Fluxo do desenvolvimento do sistema. Fonte: Autoral, usando icones do Freepik - Flaticon.&amp;lt;/i&amp;gt;" width="90%" /&gt;
+&lt;p class="caption"&gt;&lt;i&gt;Fluxo do desenvolvimento do sistema. Fonte: Autoral, usando icones do Freepik - Flaticon.&lt;/i&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: middle
+
+# Especificação
+&lt;center&gt;&lt;br&gt;&lt;h4&gt;Atividade: Conjunto de atributos. Pode ter conexões de precedência.&lt;/h4&gt;&lt;br&gt;&lt;/center&gt;
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/metod/especifica.svg" alt="&amp;lt;i&amp;gt;Especificação da versão atual. Fonte: Autoral.&amp;lt;/i&amp;gt;" width="70%" /&gt;
+&lt;p class="caption"&gt;&lt;i&gt;Especificação da versão atual. Fonte: Autoral.&lt;/i&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: middle
+
+# Protótipo dev
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/metod/prototipo.png" alt="&amp;lt;i&amp;gt;Versão atual do FluxPRT. Fonte: Autoral.&amp;lt;/i&amp;gt;" width="100%" /&gt;
+&lt;p class="caption"&gt;&lt;i&gt;Versão atual do FluxPRT. Fonte: Autoral.&lt;/i&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: middle
+
+
+&lt;img src="visual_citations/Alfaro-Espinoza_2021.png" width="60%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+
+&lt;img src="img/result/fluxoAtivbr.svg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+```
+--- http://www.flux2.luar.dcc.ufmg.br
+--- guest2021: gu3st
+```
+
+---
+class: middle
+## FluxPRT
+
+<div class="shareagain" style="min-width:300px;margin:1em auto;">
+<iframe src="http://www.flux2.luar.dcc.ufmg.br" width="1600" height="700" style="border:2px solid currentColor;" loading="lazy" allowfullscreen></iframe>
+<script>fitvids('.shareagain', {players: 'iframe'});</script>
+</div>
+
+---
+class: middle
+
+## Documentação
+
+.left-column[ 
+📌 Sistema Flux
+
+📌  Específ. do FluxPRT
+
+
+```
+--- https://fluxprt.github.io
+```
+]
+
+.right-column[ 
+&lt;img src="img/result/documentacao.gif" width="96%" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+
+
+---
+class: middle
+## Documentação específica do FluxPRT
+
+<div class="shareagain" style="min-width:300px;margin:1em auto;">
+<iframe src="https://fluxprt.github.io" width="1600" height="700" style="border:2px solid currentColor;" loading="lazy" allowfullscreen></iframe>
+<script>fitvids('.shareagain', {players: 'iframe'});</script>
+</div>
+
+---
+class: middle
+
+## Diferentes enfoques de trabalho
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/result/labApproach.png" alt="&amp;lt;center&amp;gt;&amp;lt;i&amp;gt;Interação entre o sistema Flux e o Guia Interativo. Fonte: Alfaro-Espinoza et. al. (2021).&amp;lt;/i&amp;gt;&amp;lt;/center&amp;gt;" width="100%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;i&gt;Interação entre o sistema Flux e o Guia Interativo. Fonte: Alfaro-Espinoza et. al. (2021).&lt;/i&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: middle
+
+# Testes
+&lt;center&gt;&lt;iframe width="940" height="450" src="https://www.youtube.com/embed/2lwmWPjRnDk?start=8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
+
+---
+class: middle
+
+# Feedback
+
+&lt;center&gt;&lt;br&gt;&lt;h4&gt;Moficações nas atividades e atributos&lt;/h4&gt;&lt;br&gt;&lt;br&gt;&lt;/center&gt;
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/result/fluxoAtivbrModif.png" alt="&amp;lt;center&amp;gt;&amp;lt;i&amp;gt;Atividades do FluxPRT. Fonte: Autoral.&amp;lt;/i&amp;gt;&amp;lt;/center&amp;gt;" width="100%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;i&gt;Atividades do FluxPRT. Fonte: Autoral.&lt;/i&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: middle
+
+# Feedback incorporado
+
+&lt;center&gt;&lt;br&gt;&lt;h4&gt;15 atividades&lt;/h4&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/center&gt;
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/result/fluxoAtivTestes.svg" alt="&amp;lt;center&amp;gt;&amp;lt;i&amp;gt;Atividades do FluxPRT. Fonte: Autoral.&amp;lt;/i&amp;gt;&amp;lt;/center&amp;gt;" width="100%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;i&gt;Atividades do FluxPRT. Fonte: Autoral.&lt;/i&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: middle
+
+# Relatório
+
+<div class="shareagain" style="min-width:300px;margin:1em auto;max-width:80%;">
+<iframe src="https://github.com/ElizaAlfaro" width="1600" height="900" style="border:2px solid currentColor;" loading="lazy" allowfullscreen></iframe>
+<script>fitvids('.shareagain', {players: 'iframe'});</script>
+</div>
+
+---
+class: middle
+
+
+# FluxPRT
+&lt;br&gt;
+
+|Flexível|Adaptável|Rastreamento|Relatórios|Suporte|Gratuito (*)|
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|&lt;img src="img/nextstep/flexible.png"&lt;/&gt;|&lt;img src="img/nextstep/adaptable.png"&lt;/&gt;|&lt;img src="https://cdn-icons-png.flaticon.com/512/3428/3428946.png"&lt;/&gt;|&lt;img src="https://cdn-icons-png.flaticon.com/512/1289/1289270.png"&lt;/&gt;|&lt;img src="https://cdn-icons-png.flaticon.com/512/1001/1001218.png"&lt;/&gt;|&lt;img src="https://cdn-icons-png.flaticon.com/512/2332/2332874.png"&lt;/&gt;|
+|Mudar o fluxo| Diferentes enfoques|Acompanhamento da Amostra|Compartilhar dados|Cada membro|Labs com poucos recursos|
+
+.pull-right[
+*Fonte: &lt;a href="https://www.flaticon.com/free-icons/share" title="share icons"&gt;Freepik - Flaticon&lt;/a&gt;. Licença CC Atrib.*
+]
+
+---
+
+
+class: middle
+
+# Próximos Passos
+
+&lt;br&gt;
+
+|Workflows complexos|Estándares internacionais|Guia Interativo|Versão inglês|Análise de dados|
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|&lt;img src="https://cdn-icons-png.flaticon.com/512/1574/1574138.png"&lt;/&gt;|&lt;img src="https://cdn-icons-png.flaticon.com/512/1156/1156677.png"&lt;/&gt;|&lt;img src="img/nextstep/userGuide.png"&lt;/&gt;|&lt;img src="https://cdn-icons-png.flaticon.com/512/5511/5511398.png"&lt;/&gt;|&lt;img src="https://cdn-icons-png.flaticon.com/512/3043/3043574.png"&lt;/&gt;|
+|Cada membro|MIAPE, BPL, ISO17904|Todas as atividades|Workflow e Guia Interivo|Integrar ferramentas|
+
+
+.pull-right[
+*Fonte: &lt;a href="https://www.flaticon.com/free-icons/share" title="share icons"&gt;Freepik - Flaticon&lt;/a&gt;. Licença CC Atrib.*
+]
+
+---
+
+class: middle
+
+# ¡Muito obrigada!
+.pull-left[
+
+&lt;img src="img/thanks.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+
+.pull-right[
+**Agradecimientos especiais**:
+- Sérgio Campos.
+- Alessandra Campos
+- Equipe LUAR
+- Membros LPBP - UFV
+- Secretaria do PPG Bioinformática
+- Bolsa CAPES 88887.517813/2020-00
+]
+
+
+**Contato**:
+- Email: &lt;a href="mailto:elizaespinoza@ufmg.br"&gt;elizaespinoza@ufmg.br&lt;/a&gt;
+- Github: &lt;a href="https://github.com/ElizaAlfaro"&gt;@elizaAlfaro&lt;/a&gt;
+- Twitter: &lt;a href="http://twitter.com/elizabioinfo"&gt;@elizabioinfo&lt;/a&gt;
+
+
+.pull-right[
+*Feito com 💙 usando [Xaringan](https://github.com/yihui/xaringan) e [Kunoichi](https://github.com/emitanaka/ninja-theme).*
+]
+
+xaringan::inf_mr()
+
+---
+class: inverse, middle
+
+#Equipe LUAR
+
+&lt;img src="img/luarmembers.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+class: middle
+## Referências
+
+
+&lt;img src="visual_citations/Alfaro-Espinoza_2021.png" width="50%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+&lt;img src="visual_citations/Higgins_2022.png" width="50%" style="display: block; margin: auto 0 auto auto;" /&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

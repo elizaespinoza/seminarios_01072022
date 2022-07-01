@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Template Variables</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Template Variables</h1>
+
+
+
+<p>The following table shows the template variables, their default values in the standard <code>xaringanthemer</code> theme, the primary element to which the property is applied, and a brief description of the template variable.</p>
+<p>For example, <code>background_color</code> by default sets the <code>background-color</code> CSS property of the <code>.remark-slide-content</code> class to <code>#FFF</code>.</p>
+<p>Use this table to find the template variable you would like to modify. You can also use this table to find the CSS class or element associated with a particular template item.</p>
+<p>Note that some theme functions, like <code>style_mono_accent()</code>, have additional parameters and a specific set of default values unique to the theme. However, with any theme function you can override the theme’s defaults by directly setting any of the arguments listed below when calling the theme function.</p>
+<p>To be concrete, <code>style_mono_accent()</code> has three additional arguments: <code>base_color</code> (the accent color), <code>white_color</code>, and <code>black_color</code>. In this theme, the background slide color defaults to <code>white_color</code>, but you can choose a different slide background color by setting <code>background_color</code>, for example <code>background_color = &quot;#EAEAEA&quot;</code>.</p>
+<table style="width:100%;">
+<colgroup>
+<col width="7%" />
+<col width="48%" />
+<col width="10%" />
+<col width="17%" />
+<col width="10%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Description</th>
+<th align="left">Element</th>
+<th align="left">CSS Property</th>
+<th align="left">Default</th>
+<th align="left">CSS Variable</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>text_color</code></td>
+<td align="left">Text Color</td>
+<td align="left">body</td>
+<td align="left"></td>
+<td align="left">#000</td>
+<td align="left"><code>--text_color</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>header_color</code></td>
+<td align="left">Header Color</td>
+<td align="left">h1, h2, h3</td>
+<td align="left"></td>
+<td align="left">#000</td>
+<td align="left"><code>--header-color</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>background_color</code></td>
+<td align="left">Slide Background Color</td>
+<td align="left">.remark-slide-content</td>
+<td align="left"></td>
+<td align="left">#FFF</td>
+<td align="left"><code>--background-color</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>link_color</code></td>
+<td align="left">Link Color</td>
+<td align="left">a, a &gt; code</td>
+<td align="left"></td>
+<td align="left">rgb(249, 38, 114)</td>
+<td align="left"><code>--link-color</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>text_bold_color</code></td>
+<td align="left">Bold Text Color</td>
+<td align="left">strong</td>
+<td align="left"></td>
+<td align="left">NULL</td>
+<td align="left"><code>--text-bold-color</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>text_slide_number_color</code></td>
+<td align="left">Slide Number Color</td>
+<td align="left">.remark-slide-number</td>
+<td align="left"></td>
+<td align="left">inverse_background_color</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>padding</code></td>
+<td align="left">Slide Padding in <code>top right [bottom left]</code> format</td>
+<td align="left">.remark-slide-content</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding">padding</a></td>
+<td align="left">16px 64px 16px 64px</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>background_image</code></td>
+<td align="left">Background image applied to each <em>and every</em> slide. Set <code>title_slide_background_image = &quot;none&quot;</code> to remove the background image from the title slide</td>
+<td align="left">.remark-slide-content</td>
+<td align="left"></td>
+<td align="left">NULL</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>background_size</code></td>
+<td align="left">Background image size, requires <code>background_image</code> to be set. If <code>background_image</code> is set, <code>background_size</code> will default to <code>cover</code> so the background fills the screen. If both <code>background_image</code> and <code>background_position</code> are set, will default to 100 percent</td>
+<td align="left">.remark-slide-content</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-size">background-size</a></td>
+<td align="left">NULL</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>background_position</code></td>
+<td align="left">Background image position, requires <code>background_image</code> to be set, and it is recommended to adjust <code>background_size</code></td>
+<td align="left">.remark-slide-content</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-position">background-position</a></td>
+<td align="left">NULL</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>code_highlight_color</code></td>
+<td align="left">Code Line Highlight</td>
+<td align="left">.remark-code-line-highlighted</td>
+<td align="left"></td>
+<td align="left">rgba(255,255,0,0.5)</td>
+<td align="left"><code>--code-highlight-color</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>code_inline_color</code></td>
+<td align="left">Inline Code Color</td>
+<td align="left">.remark-inline-code</td>
+<td align="left"></td>
+<td align="left">#000</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>code_inline_background_color</code></td>
+<td align="left">Inline Code Background Color</td>
+<td align="left">.remark-inline-code</td>
+<td align="left"></td>
+<td align="left">NULL</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>code_inline_font_size</code></td>
+<td align="left">Inline Code Text Font Size</td>
+<td align="left">.remark-inline-code</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-size">font-size</a></td>
+<td align="left">1em</td>
+<td align="left"><code>--code-inline-font-size</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>inverse_background_color</code></td>
+<td align="left">Inverse Background Color</td>
+<td align="left">.inverse</td>
+<td align="left"></td>
+<td align="left">#272822</td>
+<td align="left"><code>--inverse-background-color</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>inverse_text_color</code></td>
+<td align="left">Inverse Text Color</td>
+<td align="left">.inverse</td>
+<td align="left"></td>
+<td align="left">#d6d6d6</td>
+<td align="left"><code>--inverse-text-color</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>inverse_text_shadow</code></td>
+<td align="left">Enables Shadow on text of inverse slides</td>
+<td align="left">.inverse</td>
+<td align="left"></td>
+<td align="left">FALSE</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>inverse_header_color</code></td>
+<td align="left">Inverse Header Color</td>
+<td align="left">.inverse h1, .inverse h2, .inverse h3</td>
+<td align="left"></td>
+<td align="left">#f3f3f3</td>
+<td align="left"><code>--inverse-header-color</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>inverse_link_color</code></td>
+<td align="left">Inverse Link Color</td>
+<td align="left">.inverse a, .inverse a &gt; code</td>
+<td align="left"></td>
+<td align="left">link_color</td>
+<td align="left"><code>--inverse-link-color</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>title_slide_text_color</code></td>
+<td align="left">Title Slide Text Color</td>
+<td align="left">.title-slide</td>
+<td align="left"></td>
+<td align="left">inverse_text_color</td>
+<td align="left"><code>--title-slide-text-color</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>title_slide_background_color</code></td>
+<td align="left">Title Slide Background Color</td>
+<td align="left">.title-slide</td>
+<td align="left"></td>
+<td align="left">inverse_background_color</td>
+<td align="left"><code>--title-slide-background-color</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>title_slide_background_image</code></td>
+<td align="left">Title Slide Background Image URL</td>
+<td align="left">.title-slide</td>
+<td align="left"></td>
+<td align="left">NULL</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>title_slide_background_size</code></td>
+<td align="left">Title Slide Background Image Size, defaults to “cover” if background image is set</td>
+<td align="left">.title-slide</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-size">background-size</a></td>
+<td align="left">NULL</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>title_slide_background_position</code></td>
+<td align="left">Title Slide Background Image Position</td>
+<td align="left">.title-slide</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-position">background-position</a></td>
+<td align="left">NULL</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>footnote_color</code></td>
+<td align="left">Footnote text color (if <code>NA</code>, then it will be the same color as <code>text_color</code>)</td>
+<td align="left">.footnote</td>
+<td align="left"></td>
+<td align="left">NULL</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>footnote_font_size</code></td>
+<td align="left">Footnote font size</td>
+<td align="left">.footnote</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-size">font-size</a></td>
+<td align="left">0.9em</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>footnote_position_bottom</code></td>
+<td align="left">Footnote location from bottom of screen</td>
+<td align="left">.footnote</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position_value">position</a></td>
+<td align="left">60px</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>left_column_subtle_color</code></td>
+<td align="left">Left Column Text (not last)</td>
+<td align="left">.left-column h2, .left-column h3</td>
+<td align="left"></td>
+<td align="left">#777</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>left_column_selected_color</code></td>
+<td align="left">Left Column Current Selection</td>
+<td align="left">.left-column h2:last-of-type, .left-column h3:last-child</td>
+<td align="left"></td>
+<td align="left">#000</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>blockquote_left_border_color</code></td>
+<td align="left">Blockquote Left Border Color</td>
+<td align="left">blockquote</td>
+<td align="left"></td>
+<td align="left">lightgray</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>table_border_color</code></td>
+<td align="left">Table top/bottom border</td>
+<td align="left">table: border-top, border-bottom</td>
+<td align="left"></td>
+<td align="left">#666</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>table_row_border_color</code></td>
+<td align="left">Table row inner bottom border</td>
+<td align="left">table thead th: border-bottom</td>
+<td align="left"></td>
+<td align="left">#ddd</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>table_row_even_background_color</code></td>
+<td align="left">Table Even Row Background Color</td>
+<td align="left">thead, tfoot, tr:nth-child(even)</td>
+<td align="left"></td>
+<td align="left">#eee</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>base_font_size</code></td>
+<td align="left">Base Font Size for All Slide Elements (must be <code>px</code>)</td>
+<td align="left">html</td>
+<td align="left"></td>
+<td align="left">20px</td>
+<td align="left"><code>--base-font-size</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>text_font_size</code></td>
+<td align="left">Slide Body Text Font Size</td>
+<td align="left">.remark-slide-content</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-size">font-size</a></td>
+<td align="left">1rem</td>
+<td align="left"><code>--text-font-size</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>header_h1_font_size</code></td>
+<td align="left">h1 Header Text Font Size</td>
+<td align="left">.remark-slide-content h1</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-size">font-size</a></td>
+<td align="left">2.75rem</td>
+<td align="left"><code>--header-h1-font-size</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>header_h2_font_size</code></td>
+<td align="left">h2 Header Text Font Size</td>
+<td align="left">.remark-slide-content h2</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-size">font-size</a></td>
+<td align="left">2.25rem</td>
+<td align="left"><code>--header-h2-font-size</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>header_h3_font_size</code></td>
+<td align="left">h3 Header Text Font Size</td>
+<td align="left">.remark-slide-content h3</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-size">font-size</a></td>
+<td align="left">1.75rem</td>
+<td align="left"><code>--header-h3-font-size</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>header_background_auto</code></td>
+<td align="left">Add background under slide title automatically for h1 header elements. If not enabled, use <code>class: header_background</code> to enable</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">FALSE</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>header_background_color</code></td>
+<td align="left">Background Color for h1 Header with Background</td>
+<td align="left">.remark-slide-content h1</td>
+<td align="left"></td>
+<td align="left">header_color</td>
+<td align="left"><code>--header-background-color</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>header_background_text_color</code></td>
+<td align="left">Text Color for h1 Header with Background</td>
+<td align="left">.remark-slide-content h1</td>
+<td align="left"></td>
+<td align="left">background_color</td>
+<td align="left"><code>--header-background-text-color</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>header_background_padding</code></td>
+<td align="left">Padding for h1 Header with Background</td>
+<td align="left">.remark-slide-content h1</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding">padding</a></td>
+<td align="left">NULL</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>header_background_content_padding_top</code></td>
+<td align="left">Top Padding for Content in Slide with Header with Background</td>
+<td align="left">.remark-slide-content</td>
+<td align="left"></td>
+<td align="left">7rem</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>header_background_ignore_classes</code></td>
+<td align="left">Slide Classes Where Header with Background will not be Applied</td>
+<td align="left">.remark-slide-content</td>
+<td align="left"></td>
+<td align="left">c(‘normal’, ‘inverse’, ‘title’, ‘middle’, ‘bottom’)</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>text_slide_number_font_size</code></td>
+<td align="left">Slide Number Text Font Size</td>
+<td align="left">.remark-slide-number</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-size">font-size</a></td>
+<td align="left">0.9rem</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>text_font_google</code></td>
+<td align="left">Use <code>google_font()</code> to specify body font</td>
+<td align="left">body</td>
+<td align="left"></td>
+<td align="left">NULL</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>text_font_family</code></td>
+<td align="left">Body Text Font Family (xaringan default is <code>&#39;Droid Serif&#39;</code>)</td>
+<td align="left">body</td>
+<td align="left"></td>
+<td align="left">xaringanthemer_font_default(“text_font_family”)</td>
+<td align="left"><code>--text-font-family</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>text_font_weight</code></td>
+<td align="left">Body Text Font Weight</td>
+<td align="left">body</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight">font-weight</a></td>
+<td align="left">xaringanthemer_font_default(“text_font_weight”)</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>text_bold_font_weight</code></td>
+<td align="left">Body Bold Text Font Weight</td>
+<td align="left">strong</td>
+<td align="left"></td>
+<td align="left">bold</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>text_font_url</code></td>
+<td align="left">Body Text Font URL(s)</td>
+<td align="left"><span class="citation">@import</span> url()</td>
+<td align="left"></td>
+<td align="left">xaringanthemer_font_default(“text_font_url”)</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>text_font_family_fallback</code></td>
+<td align="left">Body Text Font Fallbacks</td>
+<td align="left">body</td>
+<td align="left"></td>
+<td align="left">xaringanthemer_font_default(“text_font_family_fallback”)</td>
+<td align="left"><code>--text-font-family-fallback</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>text_font_base</code></td>
+<td align="left">Body Text Base Font (Total Failure Fallback)</td>
+<td align="left">body</td>
+<td align="left"></td>
+<td align="left">sans-serif</td>
+<td align="left"><code>--text-font-base</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>header_font_google</code></td>
+<td align="left">Use <code>google_font()</code> to specify header font</td>
+<td align="left">body</td>
+<td align="left"></td>
+<td align="left">NULL</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>header_font_family</code></td>
+<td align="left">Header Font Family (xaringan default is <code>&#39;Yanone Kaffeesatz&#39;</code>)</td>
+<td align="left">h1, h2, h3</td>
+<td align="left"></td>
+<td align="left">xaringanthemer_font_default(“header_font_family”)</td>
+<td align="left"><code>--header-font-family</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>header_font_weight</code></td>
+<td align="left">Header Font Weight</td>
+<td align="left">h1, h2, h3</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight">font-weight</a></td>
+<td align="left">xaringanthemer_font_default(“header_font_weight”)</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>header_font_family_fallback</code></td>
+<td align="left">Header Font Family Fallback</td>
+<td align="left">h1, h2, h3</td>
+<td align="left"></td>
+<td align="left">Georgia, serif</td>
+<td align="left"><code>--header-font-family-fallback</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>header_font_url</code></td>
+<td align="left">Header Font URL</td>
+<td align="left"><span class="citation">@import</span> url</td>
+<td align="left"></td>
+<td align="left">xaringanthemer_font_default(“header_font_url”)</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>code_font_google</code></td>
+<td align="left">Use <code>google_font()</code> to specify code font</td>
+<td align="left">body</td>
+<td align="left"></td>
+<td align="left">NULL</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>code_font_family</code></td>
+<td align="left">Code Font Family</td>
+<td align="left">.remark-code, .remark-inline-code</td>
+<td align="left"></td>
+<td align="left">xaringanthemer_font_default(“code_font_family”)</td>
+<td align="left"><code>--code-font-family</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>code_font_size</code></td>
+<td align="left">Code Text Font Size</td>
+<td align="left">.remark-inline</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-size">font-size</a></td>
+<td align="left">0.9rem</td>
+<td align="left"><code>--code-font-size</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>code_font_url</code></td>
+<td align="left">Code Font URL</td>
+<td align="left"><span class="citation">@import</span> url</td>
+<td align="left"></td>
+<td align="left">xaringanthemer_font_default(“code_font_url”)</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>code_font_family_fallback</code></td>
+<td align="left">Code Font Fallback</td>
+<td align="left">.remark-code, .remark-inline-code</td>
+<td align="left"></td>
+<td align="left">xaringanthemer_font_default(“code_font_family_fallback”)</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>link_decoration</code></td>
+<td align="left">Text decoration of links</td>
+<td align="left">a, a &gt; code</td>
+<td align="left"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration">text-decoration</a></td>
+<td align="left">none</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
